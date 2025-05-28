@@ -16,7 +16,7 @@ class TextViewModel : ViewModel(){
     val textEntries = mutableListOf<TextEntry>()
     val textEntriesLive = MutableLiveData<MutableList<TextEntry>>()
 
-    val simpleDateFormat = SimpleDateFormat("HH:mm a", Locale.getDefault())
+    val simpleDateFormat = SimpleDateFormat("[HH:mm]", Locale.getDefault())
 
     fun addTextEntry(message : String){
         val currentTime = simpleDateFormat.format(Date())
