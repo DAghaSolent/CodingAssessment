@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             if (message.isNotEmpty()) {
                 textViewModel.addTextEntry(message)
                 editText.text.clear()
+                textViewModel.writeToTextFile(
+                    this, message, textViewModel.simpleDateFormat.format(Date())
+                )
             }
         }
 

@@ -1,5 +1,7 @@
 package com.example.codingassessment
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
@@ -30,5 +32,16 @@ class TextViewModel : ViewModel(){
 
         textEntries.add(textEntry)
         textEntriesLive.value = textEntries
+    }
+
+    fun writeToTextFile(context: Context, message: String, timestamp: String ){
+        try{
+            context.openFileOutput("text_entries.txt", Context.MODE_APPEND).use {
+                it.write(("Timestamp:${timestamp} / Message: ${message} \n").toByteArray())
+            }
+            Log.d("FileExample", "Data written successfully!")
+        } catch(e: Exception){
+            e.printStackTrace()
+        }
     }
 }
