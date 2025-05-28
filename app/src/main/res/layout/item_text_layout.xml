@@ -1,19 +1,34 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timestampText"
-        android:textSize="8pt"
-        android:layout_marginEnd="12dp"/>
+    <data>
+        <variable
+            name="message"
+            type="String" />
+        <variable
+            name="timestamp"
+            type="String" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/messageText"
-        android:textSize="8pt" />
+    </data>
 
-</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timestampText"
+            android:text="@{timestamp}"
+            android:textSize="8pt"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/messageText"
+            android:text="@{message}"
+            android:textSize="8pt" />
+
+    </LinearLayout>
+</layout>
