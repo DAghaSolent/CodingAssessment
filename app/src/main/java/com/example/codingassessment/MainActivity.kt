@@ -1,6 +1,8 @@
 package com.example.codingassessment
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -52,5 +54,13 @@ class MainActivity : AppCompatActivity() {
 
             textAdapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        openFileOutput("text_entries.txt", Context.MODE_PRIVATE).use {
+            it.write("".toByteArray())
+        }
+        Log.d("Contents Removed", "Text File Cleared on destroy")
     }
 }
