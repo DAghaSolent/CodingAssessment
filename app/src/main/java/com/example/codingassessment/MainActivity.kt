@@ -56,11 +56,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        openFileOutput("text_entries.txt", Context.MODE_PRIVATE).use {
-            it.write("".toByteArray())
-        }
-        Log.d("Contents Removed", "Text File Cleared on destroy")
-    }
 }
