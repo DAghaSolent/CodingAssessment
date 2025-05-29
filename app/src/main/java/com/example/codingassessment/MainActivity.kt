@@ -11,34 +11,34 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.codingassessment.databinding.ActivityMainBinding
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var textAdapter: TextAdapter
     private val textViewModel: TextViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.textViewModel = textViewModel
 
-        val editText = findViewById<EditText>(R.id.editText)
-        val okButton = findViewById<Button>(R.id.okButton)
-
-        val textEntriesView = findViewById<RecyclerView>(R.id.textEntriesListView)
         textAdapter = TextAdapter(emptyList(), emptyList())
-        textEntriesView.layoutManager = LinearLayoutManager(this)
-        textEntriesView.adapter = textAdapter
+        binding.textEntriesListView.layoutManager = LinearLayoutManager(this)
+        binding.textEntriesListView.adapter = textAdapter
 
-        okButton.setOnClickListener {
-            val message = editText.text.toString()
+        binding.okButton.setOnClickListener {
+            val message = binding.editText.text.toString()
             if (message.isNotEmpty()) {
                 textViewModel.addTextEntry(message)
-                editText.text.clear()
+                binding.editText.text.clear()
                 textViewModel.writeToTextFile(
                     this, message, textViewModel.simpleDateFormat.format(Date())
                 )

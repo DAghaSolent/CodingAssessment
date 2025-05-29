@@ -17,6 +17,7 @@ data class TextEntry(
 class TextViewModel : ViewModel(){
     val textEntries = mutableListOf<TextEntry>()
     val textEntriesLive = MutableLiveData<MutableList<TextEntry>>()
+    val currentMessageInput = MutableLiveData<String>()
 
     val simpleDateFormat = SimpleDateFormat("[HH:mm]", Locale.getDefault())
 
