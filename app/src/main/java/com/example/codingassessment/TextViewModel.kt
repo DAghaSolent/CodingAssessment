@@ -11,17 +11,17 @@ import java.util.Locale
 
 data class TextEntry(
     val message: String,
-    val timestamp : String
+    val timestamp: String
 )
 
-class TextViewModel : ViewModel(){
+class TextViewModel : ViewModel() {
     val textEntries = mutableListOf<TextEntry>()
     val textEntriesLive = MutableLiveData<MutableList<TextEntry>>()
     val currentMessageInput = MutableLiveData<String>()
 
     val simpleDateFormat = SimpleDateFormat("[HH:mm]", Locale.getDefault())
 
-    fun addTextEntry(message : String){
+    fun addTextEntry(message: String) {
         val currentTime = simpleDateFormat.format(Date())
         /* There are other cleaner options that can be utilised to retrieve the current time in Hour
            and minute format however they are for higher API level 26 and above, to keep the
@@ -35,13 +35,13 @@ class TextViewModel : ViewModel(){
         textEntriesLive.value = textEntries
     }
 
-    fun writeToTextFile(context: Context, message: String, timestamp: String ){
-        try{
+    fun writeToTextFile(context: Context, message: String, timestamp: String) {
+        try {
             context.openFileOutput("text_entries.txt", Context.MODE_APPEND).use {
                 it.write(("Timestamp:${timestamp} / Message: ${message} \n").toByteArray())
             }
             Log.d("FileExample", "Data written successfully!")
-        } catch(e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

@@ -1,20 +1,12 @@
 package com.example.codingassessment
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.codingassessment.databinding.ActivityMainBinding
 import java.util.Date
 
@@ -46,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         textViewModel.textEntriesLive.observe(this, Observer { textEntries ->
-            val msgText = textEntries.map{it.message}
+            val msgText = textEntries.map { it.message }
             val timestampText = textEntries.map { it.timestamp }
 
             textAdapter.msgText = msgText

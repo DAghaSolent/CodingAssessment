@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="textViewModel"
             type="com.example.codingassessment.TextViewModel" />
@@ -19,17 +20,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:background="#2196F3"
-                android:padding="4dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp">
+                android:padding="4dp">
 
                 <EditText
                     android:id="@+id/editText"
@@ -40,9 +41,9 @@
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:padding="8dp"
+                    android:text="@{textViewModel.currentMessageInput}"
                     android:textColor="#000000"
-                    android:textSize="14sp"
-                    android:text="@{textViewModel.currentMessageInput}"/>
+                    android:textSize="14sp" />
             </FrameLayout>
 
             <Button
@@ -52,14 +53,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="#2196F3"
-                android:padding="0dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
                 android:text="OK"
                 android:textColor="#000000"
-                app:cornerRadius="0dp"/>
+                app:cornerRadius="0dp" />
 
         </LinearLayout>
 
@@ -68,8 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
             android:clipToPadding="false"
+            android:padding="8dp"
             android:scrollbars="vertical" />
     </LinearLayout>
 </layout>
