@@ -1,6 +1,7 @@
 package com.example.codingassessment
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -27,13 +28,19 @@ class MainActivity : AppCompatActivity() {
         binding.textEntriesListView.adapter = textAdapter
 
         binding.okButton.setOnClickListener {
-            val message = binding.editText.text.toString()
-            if (message.isNotEmpty()) {
+            val message = binding.editText.text.toString().trim()
+            if (message.isNotBlank()) {
                 textViewModel.addTextEntry(message)
                 binding.editText.text.clear()
                 textViewModel.writeToTextFile(
                     this, message, textViewModel.simpleDateFormat.format(Date())
                 )
+            } else {
+                Toast.makeText(
+                    this,
+                    "Text Field cannot be empty. Please enter a message",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
