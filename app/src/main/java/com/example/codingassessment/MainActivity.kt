@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(
                     this,
                     "Text Field cannot be empty. Please enter a message",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }
