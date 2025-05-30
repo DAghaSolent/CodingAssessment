@@ -5,6 +5,9 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class TextViewModelTest {
@@ -67,6 +70,29 @@ class TextViewModelTest {
         /* Asserting that the second message added is the message that I have added within this
            test.
         */
+    }
+
+    @Test
+    fun addTextWithSpecialCharactersTest() {
+        textViewModel.addTextEntry("!@#$%^&*()_+`~[]{};':\",./<>?")
+
+        assertEquals(
+            "!@#$%^&*()_+`~[]{};':\",./<>?",
+            textViewModel.textEntriesLive.value?.get(0)?.message
+        )
+        // Asserting that the message with special characters is added correctly.
+    }
+
+    @Test
+    fun testTimestampEqualsLocalTimeTest() {
+        textViewModel.addTextEntry("Hello World")
+        val simpleDataFormat = SimpleDateFormat("[HH:mm]", Locale.getDefault())
+
+        assertEquals(
+            simpleDataFormat.format(Date()),
+            textViewModel.textEntriesLive.value?.get(0)?.timestamp
+        )
+        // Asserting that when a text entry is added the timestamp equals the local time.
     }
 
 }
