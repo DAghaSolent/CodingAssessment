@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 textViewModel.writeToTextFile(
                     this, message, textViewModel.simpleDateFormat.format(Date())
                 )
+                Toast.makeText(this, "Text Entry Successfully Added", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(
                     this,
