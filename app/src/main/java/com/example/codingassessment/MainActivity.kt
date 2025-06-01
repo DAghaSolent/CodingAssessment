@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.codingassessment.databinding.ActivityMainBinding
-import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,19 +28,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.okButton.setOnClickListener {
             val message = binding.editText.text.toString().trim()
-            if (message.isNotBlank()) {
-                textViewModel.addTextEntry(message)
+            val resultMessage = textViewModel.addTextEntry(message, this)
+
+            if (resultMessage == "Text Entry Successfully Added") {
                 binding.editText.text.clear()
-                textViewModel.writeToTextFile(
-                    this, message, textViewModel.simpleDateFormat.format(Date())
-                )
-                Toast.makeText(this, "Text Entry Successfully Added", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(
-                    this,
-                    "Text Field cannot be empty. Please enter a message",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
             }
         }
 
