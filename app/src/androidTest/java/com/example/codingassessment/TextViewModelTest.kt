@@ -1,6 +1,5 @@
 package com.example.codingassessment
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -8,22 +7,29 @@ import org.junit.Test
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import android.content.Context
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.runner.RunWith
 
-
+@RunWith(AndroidJUnit4::class)
 class TextViewModelTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
     private lateinit var textViewModel: TextViewModel
+    private lateinit var context: Context
 
     @Before
     fun setup() {
         textViewModel = TextViewModel()
+        context = ApplicationProvider.getApplicationContext<Context>()
     }
 
     @Test
     fun addTextEntryTest() {
-        textViewModel.addTextEntry("Hello World")
+        textViewModel.addTextEntry("Hello World", context)
 
         assertEquals(1, textViewModel.textEntries.size)
         // Asserting that the message has been added to the list within the ViewModel.
@@ -42,7 +48,7 @@ class TextViewModelTest {
 
     @Test
     fun addTextEntryWithFormattedTimestampTest() {
-        textViewModel.addTextEntry("Hello World")
+        textViewModel.addTextEntry("Hello World", context)
         val textEntry = textViewModel.textEntriesLive.value?.get(0)
         val timestamp = textEntry?.timestamp
 
@@ -54,8 +60,8 @@ class TextViewModelTest {
 
     @Test
     fun addMultipleTextEntriesTest() {
-        textViewModel.addTextEntry("First Message")
-        textViewModel.addTextEntry("Second Message")
+        textViewModel.addTextEntry("First Message", context)
+        textViewModel.addTextEntry("Second Message", context)
 
         assertNotNull(textViewModel.textEntriesLive.value)
         // Asserting that the LiveData List is not null.
@@ -74,7 +80,7 @@ class TextViewModelTest {
 
     @Test
     fun addTextWithSpecialCharactersTest() {
-        textViewModel.addTextEntry("!@#$%^&*()_+`~[]{};':\",./<>?")
+        textViewModel.addTextEntry("!@#$%^&*()_+`~[]{};':\",./<>?", context)
 
         assertEquals(
             "!@#$%^&*()_+`~[]{};':\",./<>?",
@@ -85,7 +91,7 @@ class TextViewModelTest {
 
     @Test
     fun testTimestampEqualsLocalTimeTest() {
-        textViewModel.addTextEntry("Hello World")
+        textViewModel.addTextEntry("Hello World", context)
         val simpleDataFormat = SimpleDateFormat("[HH:mm]", Locale.getDefault())
 
         assertEquals(
