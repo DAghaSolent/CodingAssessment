@@ -1,0 +1,3 @@
+## Coding Assessment Thoughts
+
+This was my first practical coding assessment, and I thoroughly enjoyed the experience. It reignited my passion and energy that I had when working in Android Development before business changes shifted my technical coding stack. I enjoyed exploring and learning about new tools and technologies that I hadn't worked with before within Android Development such as Data Binding, RecyclerView and UI testing with Espresso. It was both rewarding and exciting to find information, read documentation, and apply and implement what I had learned in this practical coding assessment.
