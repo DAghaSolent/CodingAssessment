@@ -1,11 +1,11 @@
 package com.example.codingassessment
 
+import android.content.Context
 import android.content.pm.ActivityInfo
-import android.os.SystemClock
 import android.view.View
-import androidx.test.espresso.Espresso.closeSoftKeyboard
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.clearText
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -18,15 +18,21 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.Matchers.not
-import org.hamcrest.Matchers.`is`
-import org.junit.After
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 @RunWith(AndroidJUnit4::class)
 class UiEspressoTest {
+
+    private lateinit var context: Context
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity> =
@@ -208,4 +214,32 @@ class UiEspressoTest {
         */
     }
 
+    @Test
+    fun completeFlowEntryToTextFile(){
+        context = ApplicationProvider.getApplicationContext()
+
+        var decorView: View? = null
+
+        activityRule.scenario.onActivity {
+            decorView = it.window.decorView
+        }
+
+        onView(withId(R.id.editText)).perform(typeText("Complete Flow Test"))
+        onView(withId(R.id.okButton)).perform(click())
+
+
+        onView(withText("Text Entry Successfully Added"))
+            .inRoot(withDecorView(not(decorView)))
+            .check(matches(isDisplayed()))
+
+        val inputStream = context.openFileInput("text_entries.txt")
+        val reader = BufferedReader(InputStreamReader(inputStream)).readText()
+
+        assertTrue("Complete Flow Test", reader.contains("Complete Flow Test"))
+        assertTrue(context.fileList().contains("text_entries.txt"))
+
+        /* A complete flow test from main activity UI interactions to testing that the text entry
+           has been added to the text file.
+        */
+    }
 }
