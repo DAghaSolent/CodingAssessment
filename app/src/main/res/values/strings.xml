@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CodingAssessment</string>
+    <string name="success_text">Text Entry Successfully Added</string>
+    <string name="error_text">Text Field cannot be empty. Please enter a message</string>
 </resources>

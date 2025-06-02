@@ -38,9 +38,9 @@ class TextViewModel : ViewModel() {
             textEntriesLive.value = textEntries
 
             writeToTextFile(context, message, currentTime)
-            "Text Entry Successfully Added"
+            context.getString(R.string.success_text)
         } else {
-            "Text Field cannot be empty. Please enter a message"
+            context.getString(R.string.error_text)
         }
 
     }

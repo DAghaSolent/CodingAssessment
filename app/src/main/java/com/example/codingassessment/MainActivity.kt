@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             val message = binding.editText.text.toString().trim()
             val resultMessage = textViewModel.addTextEntry(message, this)
 
-            if (resultMessage == "Text Entry Successfully Added") {
+            if (resultMessage == getString(R.string.success_text)) {
                 binding.editText.text.clear()
                 Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
             } else {
